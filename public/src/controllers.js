@@ -1,12 +1,10 @@
 angular.module('ContactsApp')
-    .controller('ListController', function($scope, Contact){
+    .controller('ListController', function($scope, Contact, $location){
         $scope.contacts = Contact.query();
 
 
         $scope.fields = ['firstName', 'lastName'];
 
-        console.log('Contact');
-        console.log(Contact);
 
         $scope.sort = function(field){
             $scope.sort.field = field;
@@ -18,6 +16,32 @@ angular.module('ContactsApp')
         $scope.sort.order = false;
 
 
+        $scope.show = function(id){
+            $location.url('/contact/' + id);
+        };
+
+
+    })
+    .controller('NewController', function($scope, Contact, $location){
+        $scope.Contact = new Contact({
+            firstName: ['', 'text'],
+            lastName: ['', 'text'],
+            email: ['', 'email'],
+            homePhone: ['', 'tel'],
+            cellPhone: ['', 'tel'],
+            birthday: ['', 'date'],
+            website: ['', 'url'],
+            address: ['', 'text']
+        });
+
+        $scope.save = function(){
+            if($scope.newContact.$invalid){
+                $scope.$broadcast('record:invalid');
+            } else {
+                $scope.contact.$save();
+                $location.url('/contacts');
+            }
+        };
     });
 
 
