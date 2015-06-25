@@ -13,7 +13,7 @@ router
     .use(bodyParser.json())
     .route('/contact')
     .get(function (req, res) {
-        db.find({ userId: parseInt(1, 10) }, function (err, data) {
+        db.find({ userId: parseInt(req.user.id, 10) }, function (err, data) {
             res.json(data);
         });
     })
