@@ -31,6 +31,7 @@ angular.module('ContactsApp')
                 $scope.types = FieldTypes;
 
                 $scope.remove = function(field){
+                    console.log('formField Remove triggering')
                     delete $scope.record[field];
                     $scope.blurUpdate();
                 };
@@ -51,4 +52,47 @@ angular.module('ContactsApp')
                 };
             }
         };
+    })
+    .directive('newField', function($filter, FieldTypes){
+        return {
+            restrict: 'EA',
+            templateUrl: 'views/new-field.html',
+            replace: true,
+            scope: {
+                record: '=',
+                live: '@'
+            },
+            require: '^form',
+            link: function($scope, element, attr, form){
+                $scope.types = FieldTypes;
+                $scope.field = {};
+
+                $scope.show = function(type){
+                    console.log('Add Triggering');
+                    $scope.field.type = type;
+                    $scope.display = true;
+                };
+
+                $scope.remove = function(){
+                    console.log('remove triggering');
+                    $scope.field = {};
+                    $scope.display = false;
+                };
+
+                $scope.add = function(){
+                    if(form.newField.$valid){
+                        $scope.record[$filter('camelCase')($scope.field.name)] = [$scope.field.value, $scope.field.type];
+                        $scope.remove();
+
+                        if($scope.live !== 'false'){
+                            $scope.record.$update(function(updatedRecord){
+                                $scope.record = updatedRecord;
+                            });
+                        }
+
+                    }
+                };
+
+            }
+        }
     });
