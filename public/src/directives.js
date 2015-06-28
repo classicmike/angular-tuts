@@ -37,7 +37,7 @@ angular.module('ContactsApp')
 
                 $scope.blurUpdate = function(){
                     if($scope.live !== 'false'){
-                        $scope.record.update(function(updatedRecord){
+                        $scope.record.$update(function(updatedRecord){
                             $scope.record = updatedRecord;
                         });
                     }
