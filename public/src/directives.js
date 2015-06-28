@@ -24,6 +24,10 @@ angular.module('ContactsApp')
                 required: '@'
             },
             link: function($scope, element, attr){
+                $scope.$on('record:invalid', function(){
+                   $scope[$scope.field].$setDirty();
+                });
+
                 $scope.types = FieldTypes;
 
                 $scope.remove = function(field){

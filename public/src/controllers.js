@@ -23,7 +23,7 @@ angular.module('ContactsApp')
 
     })
     .controller('NewController', function($scope, Contact, $location){
-        $scope.Contact = new Contact({
+        $scope.contact = new Contact({
             firstName: ['', 'text'],
             lastName: ['', 'text'],
             email: ['', 'email'],
