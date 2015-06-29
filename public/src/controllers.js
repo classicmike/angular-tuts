@@ -1,5 +1,7 @@
 angular.module('ContactsApp')
-    .controller('ListController', function($scope, Contact, $location){
+    .controller('ListController', function($scope, $rootScope, Contact, $location){
+        $rootScope.PAGE = "all";
+
         $scope.contacts = Contact.query();
 
 
@@ -22,7 +24,8 @@ angular.module('ContactsApp')
 
 
     })
-    .controller('NewController', function($scope, Contact, $location){
+    .controller('NewController', function($scope, $rootScope, Contact, $location){
+        $rootScope.PAGE = "new";
         $scope.contact = new Contact({
             firstName: ['', 'text'],
             lastName: ['', 'text'],
@@ -43,7 +46,8 @@ angular.module('ContactsApp')
             }
         };
     })
-    .controller('SingleController', function($scope, $location, Contact, $routeParams){
+    .controller('SingleController', function($scope, $rootScope, $location, Contact, $routeParams){
+        $rootScope.PAGE = "single";
         console.log('Getting the contact');
         $scope.contact = Contact.get({id: parseInt($routeParams.id, 10)});
         $scope.delete = function(){
