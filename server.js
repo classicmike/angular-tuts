@@ -8,7 +8,6 @@ app
     .use(users)
     .use('/api', api)
     .get('*', function(req, res){
-        console.log(req.user);
         if(!req.user){
             res.redirect('/login')
         } else {

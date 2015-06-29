@@ -31,7 +31,6 @@ angular.module('ContactsApp')
                 $scope.types = FieldTypes;
 
                 $scope.remove = function(field){
-                    console.log('formField Remove triggering')
                     delete $scope.record[field];
                     $scope.blurUpdate();
                 };
@@ -68,13 +67,11 @@ angular.module('ContactsApp')
                 $scope.field = {};
 
                 $scope.show = function(type){
-                    console.log('Add Triggering');
                     $scope.field.type = type;
                     $scope.display = true;
                 };
 
                 $scope.remove = function(){
-                    console.log('remove triggering');
                     $scope.field = {};
                     $scope.display = false;
                 };
