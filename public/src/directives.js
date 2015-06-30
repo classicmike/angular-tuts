@@ -31,7 +31,6 @@ angular.module('ContactsApp')
                 $scope.types = FieldTypes;
 
                 $scope.remove = function(field){
-                    console.log('formField Remove triggering')
                     delete $scope.record[field];
                     $scope.blurUpdate();
                 };
