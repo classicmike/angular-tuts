@@ -67,13 +67,11 @@ angular.module('ContactsApp')
                 $scope.field = {};
 
                 $scope.show = function(type){
-                    console.log('Add Triggering');
                     $scope.field.type = type;
                     $scope.display = true;
                 };
 
                 $scope.remove = function(){
-                    console.log('remove triggering');
                     $scope.field = {};
                     $scope.display = false;
                 };
